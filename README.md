@@ -5,7 +5,6 @@ ________________________________________________________________________________
   Funcionalidades:
   ° Nome
   ° Email
-  nada
   ° Senha
   ° Sexo
   ° Data de nascimento
