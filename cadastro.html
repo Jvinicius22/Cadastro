@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title >Cadastro</title>
+    <link rel="icon" href="technology.png">
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+       background: linear-gradient(130deg,black,#014486);
+        background-position: center;
+        background-size: cover;       /* cobre toda a tela */
+        height: 100vh;
+    }
+
+    h1{
+        text-align: center;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 60px;
+        margin-top: 30px;
+        color: white;
+        letter-spacing: 2px;
+    }
+    p{
+        text-align: center;
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 18px;
+        max-width: 600px;
+        margin: 10px auto;
+        color: white;
+    }
+
+    #mensagem {
+    margin-top: 15px;
+    font-weight: bold;
+    text-align: center;
+    }
+
+    .sucesso {
+    color: #00ff88;
+    }
+
+    .caixadados {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    backdrop-filter: blur(20px);           /*  efeito vidro */
+    -webkit-backdrop-filter: blur(10px);   /*  suporte Safari */
+
+    font-size: 15px;
+    color: white;
+    font-size: 20px;
+    box-shadow: 0px 32px 32px rgba(0, 0, 0, 0.4);
+    border: 3px solid white;
+    border-radius: 40px;
+    text-align: center;
+
+    width: 600px;
+    margin: 0 auto; /*  centraliza */
+    margin: 50px auto 0; /*  desce a caixa */
+    }
+
+    .caixadados input[type="text"],
+    .caixadados input[type="email"],
+    .caixadados input[type="password"],
+    .caixadados input[type="date"] {
+    width: 80%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.3); /*  transparente */
+    border: 1px solid #ccc;
+    }
+    
+    .presenca{
+        text-align: center;
+        color: white;
+        margin: 50px auto 0;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 20px;
+    }
+    .presenca input[type="submit"]{
+        border-radius: 10px;
+        border: none;
+        font-size: 15px;
+        width: 140px;
+        padding: 8px;
+    }
+    .presenca input:hover{
+       background-color: rgba(255, 255, 255, 0.1);
+        cursor: pointer;
+    }
+
+</style>
+<body>
+
+    <h1>Faça Seu Cadastro</h1>
+    <br>
+
+    <p>Para participar do evento, preencha o formulário abaixo: </p>
+    <hr>
+
+        <div class="caixadados">
+
+        <form action="" method="post" onsubmit="return validaridade()">
+            
+          <label for="">Nome</label><br>
+          <input type="text" name="Nome" id="idnome" minlength="3" maxlength="120" required><br>
+          
+          <label for="">Email</label><br>
+          <input type="email" name="Email" id="idemail" maxlength="200" required><br>
+
+          <label for="">Senha</label><br>
+          <input type="password" name="Senha" id="idpass" maxlength="150" minlength="6" required><br>
+
+          <label for="">Sexo</label><br>
+          <input type="radio" name="Sexo" id="idsexo" value="M">Masculino
+          <input type="radio" name="Sexo" id="idsexo" value="F">Feminino <br><br>
+
+          <label for="">Nascimento</label><br>
+          <input type="date" name="Nascimento" id="idnascimento"><br>
+
+          <div class="presenca">
+
+          <label for="">Confirmar Presença?</label><br>
+          <input type="submit" value="Confirmar">
+          
+        </div>
+        <div id="mensagem"></div>
+
+        </form>
+
+        </div>
+
+        <!---JavaScript--->
+        <script>
+            function validaridade() {
+
+                let msg = document.getElementById("mensagem");
+                let dataNascimento = document.getElementById("idnascimento").value;
+
+                if(!dataNascimento){
+                    alert("Por Favor, preencha sua data de nascimento.");
+                    return false;
+                }//alerta
+
+                let hoje = new Date();
+                let nascimento = new Date(dataNascimento);
+
+                let idade = hoje.getFullYear() - nascimento.getFullYear();
+                let mes= hoje.getMonth() - nascimento.getMonth();
+
+                //Ajuste caso ainda não tenha feito aniversário no ano
+
+                if(mes<0 || (mes === 0 && hoje.getDate()<nascimento.getDate())){
+                    idade--;
+                }
+                
+                if(idade<18){
+                    alert("Proibido para menores de 18 anos!");
+                    return false; //impede envio
+                }
+                msg.innerHTML = "Cadastro realizado com sucesso! ✅";
+                msg.className = "sucesso";
+                return false; // impede envio só pra demonstrar
+                
+             }
+
+        </script>
+
+</body>
+</html>
